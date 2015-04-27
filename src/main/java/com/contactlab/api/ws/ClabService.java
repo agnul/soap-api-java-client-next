@@ -41,6 +41,7 @@ import com.contactlab.api.ws.domain.LookupPreferences;
 import com.contactlab.api.ws.domain.Message;
 import com.contactlab.api.ws.domain.MessageModels;
 import com.contactlab.api.ws.domain.SendImmediateOptions;
+import com.contactlab.api.ws.domain.SplitTestCampaign;
 import com.contactlab.api.ws.domain.Subscriber;
 import com.contactlab.api.ws.domain.SubscriberAttribute;
 import com.contactlab.api.ws.domain.SubscriberSource;
@@ -998,6 +999,29 @@ public interface ClabService {
 
     /**
      * 
+     * @param mail
+     * @param token
+     * @param hours
+     * @param campaignIdentifier
+     * @return
+     *     returns java.lang.Integer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "sendSplitTest", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.SendSplitTest")
+    @ResponseWrapper(localName = "sendSplitTestResponse", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.SendSplitTestResponse")
+    public Integer sendSplitTest(
+        @WebParam(name = "token", targetNamespace = "")
+        AuthToken token,
+        @WebParam(name = "campaignIdentifier", targetNamespace = "")
+        int campaignIdentifier,
+        @WebParam(name = "hours", targetNamespace = "")
+        Integer hours,
+        @WebParam(name = "mail", targetNamespace = "")
+        Boolean mail);
+
+    /**
+     * 
      * @param notBefore
      * @param token
      * @param campaignIdentifier
@@ -1100,6 +1124,26 @@ public interface ClabService {
         AuthToken token,
         @WebParam(name = "campaignIdentifier", targetNamespace = "")
         int campaignIdentifier);
+
+    /**
+     * 
+     * @param filterIdentifier
+     * @param token
+     * @param sourceIdentifier
+     * @return
+     *     returns java.lang.Integer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "countSubscribersIncludedInFilter", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.CountSubscribersIncludedInFilter")
+    @ResponseWrapper(localName = "countSubscribersIncludedInFilterResponse", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.CountSubscribersIncludedInFilterResponse")
+    public Integer countSubscribersIncludedInFilter(
+        @WebParam(name = "token", targetNamespace = "")
+        AuthToken token,
+        @WebParam(name = "sourceIdentifier", targetNamespace = "")
+        int sourceIdentifier,
+        @WebParam(name = "filterIdentifier", targetNamespace = "")
+        int filterIdentifier);
 
     /**
      * 
@@ -1217,26 +1261,6 @@ public interface ClabService {
 
     /**
      * 
-     * @param filterIdentifier
-     * @param token
-     * @param sourceIdentifier
-     * @return
-     *     returns java.lang.Integer
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "countSubscribersIncludedInFilter", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.CountSubscribersIncludedInFilter")
-    @ResponseWrapper(localName = "countSubscribersIncludedInFilterResponse", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.CountSubscribersIncludedInFilterResponse")
-    public Integer countSubscribersIncludedInFilter(
-        @WebParam(name = "token", targetNamespace = "")
-        AuthToken token,
-        @WebParam(name = "sourceIdentifier", targetNamespace = "")
-        int sourceIdentifier,
-        @WebParam(name = "filterIdentifier", targetNamespace = "")
-        int filterIdentifier);
-
-    /**
-     * 
      * @param token
      * @param attribute
      * @param lookupPrefs
@@ -1319,6 +1343,40 @@ public interface ClabService {
     public boolean invalidateToken(
         @WebParam(name = "token", targetNamespace = "")
         AuthToken token);
+
+    /**
+     * 
+     * @param token
+     * @param campaignToSendId
+     * @return
+     *     returns java.lang.Integer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "sendSplitTestWinner", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.SendSplitTestWinner")
+    @ResponseWrapper(localName = "sendSplitTestWinnerResponse", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.SendSplitTestWinnerResponse")
+    public Integer sendSplitTestWinner(
+        @WebParam(name = "token", targetNamespace = "")
+        AuthToken token,
+        @WebParam(name = "campaignToSendId", targetNamespace = "")
+        Integer campaignToSendId);
+
+    /**
+     * 
+     * @param splitTestCampaign
+     * @param token
+     * @return
+     *     returns com.contactlab.api.ws.domain.SplitTestCampaign
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "createSplitTest", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.CreateSplitTest")
+    @ResponseWrapper(localName = "createSplitTestResponse", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.CreateSplitTestResponse")
+    public SplitTestCampaign createSplitTest(
+        @WebParam(name = "token", targetNamespace = "")
+        AuthToken token,
+        @WebParam(name = "splitTestCampaign", targetNamespace = "")
+        SplitTestCampaign splitTestCampaign);
 
     /**
      * 
