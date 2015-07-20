@@ -351,6 +351,23 @@ public interface ClabService {
 
     /**
      * 
+     * @param token
+     * @param code
+     * @return
+     *     returns com.contactlab.api.ws.MobileApplication
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getMobileApplicationByCode", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.GetMobileApplicationByCode")
+    @ResponseWrapper(localName = "getMobileApplicationByCodeResponse", targetNamespace = "http://ws.api.contactlab.com/", className = "com.contactlab.api.ws.GetMobileApplicationByCodeResponse")
+    public MobileApplication getMobileApplicationByCode(
+        @WebParam(name = "token", targetNamespace = "")
+        AuthToken token,
+        @WebParam(name = "code", targetNamespace = "")
+        String code);
+
+    /**
+     * 
      * @param filterIdentifier
      * @param token
      * @return
